@@ -23,6 +23,7 @@ controller:
 #  - dark-theme:567.v9d3ca_a_3142f5
   - locale:587.v7b_843928a_719
   - github-branch-source:1822.v9eec8e5e69e3
+  - scm-filter-branch-pr:222.v72301ecb_a_ee7
   JCasC:
     defaultConfig: true
     configScripts:
