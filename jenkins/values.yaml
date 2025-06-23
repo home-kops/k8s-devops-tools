@@ -47,7 +47,7 @@ controller:
                 templates:
                   - name: "agent-s"
                     label: "agent-s"
-                    serviceAccount: "jenkins-admin"
+                    serviceAccount: "jenkins"
                     containers:
                       - name: "jnlp"
                         image: "msd117/jenkins-generic-agent:0.0.2"
