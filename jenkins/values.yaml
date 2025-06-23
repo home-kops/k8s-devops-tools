@@ -22,6 +22,7 @@ controller:
   - job-dsl:1.93
 #  - dark-theme:567.v9d3ca_a_3142f5
   - locale:587.v7b_843928a_719
+  - github-branch-source
   JCasC:
     defaultConfig: true
     configScripts:
