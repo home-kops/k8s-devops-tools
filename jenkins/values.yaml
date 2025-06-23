@@ -75,7 +75,9 @@ controller:
       jobs: |
         jobs:
         - script: >
-            def repos = []
+            def repos = [
+              'k8s-devops-tools'
+            ]
 
             repos.each { repoName ->
               multibranchPipelineJob(repoName) {

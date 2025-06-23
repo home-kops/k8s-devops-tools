@@ -15,15 +15,9 @@ pipeline {
 
     stage('Verify') {
       steps {
-        withCredentials(
-          [
-            string(credentialsId: 'server1-domain', variable: 'DOMAIN'),
-            string(credentialsId: 'nfs1-server', variable: 'NFS1_SERVER')
-          ]
-        ) {
-          // Run the deploy script dry-run mode to validate the resources
-          sh './tooling/deploy -d'
-        }
+        sh 'kubectl kustomize ./argocd --enable-helm'
+        sh 'kubectl kustomize ./jenkins --enable-helm'
+        sh 'kubectl kustomize ./renovate --enable-helm'
       }
     }
   }
