@@ -50,7 +50,7 @@ controller:
                     serviceAccount: "jenkins-admin"
                     containers:
                       - name: "jnlp"
-                        image: "msd117/jenkins-generic-agent:0.0.1"
+                        image: "msd117/jenkins-generic-agent:0.0.2"
                         ttyEnabled: true
                         resourceRequestCpu: "100m"
                         resourceRequestMemory: "256Mi"
