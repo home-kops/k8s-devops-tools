@@ -15,9 +15,9 @@ pipeline {
 
     stage('Verify') {
       steps {
-        sh 'kubectl kustomize ./argocd --enable-helm'
-        sh 'kubectl kustomize ./jenkins --enable-helm'
-        sh 'kubectl kustomize ./renovate --enable-helm'
+        sh '/usr/local/bin/kubectl kustomize ./argocd --enable-helm'
+        sh '/usr/local/bin/kubectl kustomize ./jenkins --enable-helm'
+        sh '/usr/local/bin/kubectl kustomize ./renovate --enable-helm'
       }
     }
   }
