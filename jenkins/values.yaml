@@ -78,7 +78,8 @@ controller:
         jobs:
         - script: >
             def repos = [
-              'k8s-devops-tools'
+              'k8s-devops-tools',
+              'k8s-network'
             ]
 
             repos.each { repoName ->
