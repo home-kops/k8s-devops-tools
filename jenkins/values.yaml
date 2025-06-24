@@ -61,7 +61,8 @@ controller:
               'k8s-devops-tools',
               'k8s-media',
               'k8s-network',
-              'k8s-storage'
+              'k8s-storage',
+              'k8s-vault'
             ]
 
             repos.each { repoName ->
