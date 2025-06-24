@@ -15,6 +15,7 @@ controller:
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
     hostName: ci.<path:secret/data/infra#domain>
   cloudName: "kubernetes"
+  disableDefaultAgent: true
   podTemplates:
     agent-s:
     - name: "agent-s"
