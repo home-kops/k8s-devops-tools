@@ -46,14 +46,14 @@ controller:
                       id: "github-home-kops-token"
                       username: "<path:secret/data/devopstools/jenkins#gh_org_username>"
                       password: "<path:secret/data/devopstools/jenkins#gh_org_token>"
-#          themeManager:
-#            disableUserThemes: true
-#            theme: "darkSystem"
       appearance: |
         appearance:
           locale:
             systemLocale: en
             ignoreAcceptLanguage: true
+          themeManager:
+            disableUserThemes: true
+            theme: "darkSystem"
       jobs: |
         jobs:
         - script: >
