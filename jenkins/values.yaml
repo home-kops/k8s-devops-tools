@@ -15,6 +15,19 @@ controller:
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
     hostName: ci.<path:secret/data/infra#domain>
   cloudName: "kubernetes"
+  podTemplates:
+    agent-s:
+    - name: "agent-s"
+      label: "agent-s"
+      serviceAccount: "jenkins"
+      containers:
+      - name: "jnlp"
+        image: "msd117/jenkins-generic-agent:0.0.1"
+        ttyEnabled: true
+        resourceRequestCpu: "100m"
+        resourceRequestMemory: "256Mi"
+        resourceLimitCpu: "200m"
+        resourceLimitMemory: "512Mi"
   numExecutors: 0
   javaOpts: "-Djenkins.install.runSetupWizard=false"
   jenkinsUrl: https://ci.<path:secret/data/infra#domain>/
@@ -38,24 +51,6 @@ controller:
           authorizationStrategy:
             loggedInUsersCanDoAnything:
               allowAnonymousRead: false
-          clouds:
-            - kubernetes:
-                name: "k8s"
-                serverUrl: "https://192.168.1.50:6443"
-                namespace: "devops-tools"
-                webSocket: true
-                templates:
-                  - name: "agent-s"
-                    label: "agent-s"
-                    serviceAccount: "jenkins"
-                    containers:
-                      - name: "jnlp"
-                        image: "msd117/jenkins-generic-agent:0.0.3"
-                        ttyEnabled: true
-                        resourceRequestCpu: "100m"
-                        resourceRequestMemory: "256Mi"
-                        resourceLimitCpu: "200m"
-                        resourceLimitMemory: "512Mi"
       credentials: |
         credentials:
           system:
