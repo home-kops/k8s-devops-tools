@@ -15,20 +15,6 @@ controller:
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
     hostName: ci.<path:secret/data/infra#domain>
   cloudName: "kubernetes"
-  disableDefaultAgent: true
-  podTemplates:
-    agent-s: |
-      - name: "agent-s"
-        label: "agent-s"
-        serviceAccount: "jenkins"
-        containers:
-          - name: "jnlp"
-            image: "msd117/jenkins-generic-agent:0.0.1"
-            ttyEnabled: true
-            resourceRequestCpu: "100m"
-            resourceRequestMemory: "256Mi"
-            resourceLimitCpu: "200m"
-            resourceLimitMemory: "512Mi"
   numExecutors: 0
   javaOpts: "-Djenkins.install.runSetupWizard=false"
   jenkinsUrl: https://ci.<path:secret/data/infra#domain>/
@@ -40,18 +26,16 @@ controller:
   - scm-filter-branch-pr:222.v72301ecb_a_ee7
   JCasC:
     defaultConfig: true
+    securityRealm: |-
+      local:
+        allowsSignup: false
+        users:
+        - id: admin
+          password: <path:secret/data/devopstools/jenkins#admin_password>
+    authorizationStrategy: |-
+      loggedInUsersCanDoAnything:
+        allowAnonymousRead: false
     configScripts:
-      jenkins: |
-        jenkins:
-          securityRealm:
-            local:
-              allowsSignup: false
-              users:
-                - id: admin
-                  password: <path:secret/data/devopstools/jenkins#admin_password>
-          authorizationStrategy:
-            loggedInUsersCanDoAnything:
-              allowAnonymousRead: false
       credentials: |
         credentials:
           system:
@@ -123,6 +107,23 @@ controller:
                 }
               }
             }
+
+agent:
+  disableDefaultAgent: true
+  podTemplates:
+    agent-s: |
+      - name: "agent-s"
+        label: "agent-s"
+        serviceAccount: "jenkins"
+        containers:
+          - name: "jnlp"
+            image: "msd117/jenkins-generic-agent:0.0.1"
+            ttyEnabled: true
+            resourceRequestCpu: "100m"
+            resourceRequestMemory: "256Mi"
+            resourceLimitCpu: "200m"
+            resourceLimitMemory: "512Mi"
+
 persistence:
   enabled: true
   storageClass: nfs-sc
