@@ -79,6 +79,7 @@ controller:
         - script: >
             def repos = [
               'k8s-devops-tools',
+              'k8s-media',
               'k8s-network'
             ]
 
