@@ -59,7 +59,7 @@ configs:
           - |
             kustomize build . --enable-helm | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
 
-redis-ha:
+redis:
   enabled: true
 
 controller:
