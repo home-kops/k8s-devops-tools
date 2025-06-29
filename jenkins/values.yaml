@@ -114,6 +114,7 @@ controller:
 
 agent:
   disableDefaultAgent: true
+  websocket: true
   podTemplates:
     agent-s: |
       - name: "agent-s"
