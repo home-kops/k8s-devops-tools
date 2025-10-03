@@ -24,7 +24,7 @@ jobs:
     - name: Find directories with kustomization.yaml
       id: find_kustomizations
       run: |
-        kustomization_dirs="$(find . -type f -name 'kustomization.yaml' -exec dirname {} \; | sed 's|^\./||' | tr '\n' ',' | sed 's/^\(.*\),/\1/')"
+        kustomization_dirs="$(find . -type f -name 'kustomization.yaml' -exec dirname {} \; | sed 's|^\./||' | sed 's/.*/"&"/' | paste -sd, - | sed 's/,/, /g')"
         echo "value=[$kustomization_dirs]" >> $GITHUB_OUTPUT
 
   validate:
