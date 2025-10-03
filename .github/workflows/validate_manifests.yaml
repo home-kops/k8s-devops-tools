@@ -27,7 +27,7 @@ jobs:
         kustomization_dirs="$(find . -type f -name 'kustomization.yaml' -exec dirname {} \; | sed 's|^\./||' | sed 's/.*/"&"/' | paste -sd, - | sed 's/,/, /g')"
         echo "value=[$kustomization_dirs]" >> $GITHUB_OUTPUT
 
-  validate:
+  validate-kustomizations:
     needs: [ setup ]
     runs-on: ubuntu-latest
     strategy:
