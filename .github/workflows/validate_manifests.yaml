@@ -11,7 +11,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.matrix.outputs.value }}
+      kustomization_dirs: ${{ steps.kustomization_dirs.outputs.value }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -22,7 +22,7 @@ jobs:
         version: 'latest'
 
     - name: Find directories with kustomization.yaml
-      id: find_kustomizations
+      id: kustomization_dirs
       run: |
         kustomization_dirs="$(find . -type f -name 'kustomization.yaml' -exec dirname {} \; | sed 's|^\./||' | sed 's/.*/"&"/' | paste -sd, - | sed 's/,/, /g')"
         echo "value=[$kustomization_dirs]" >> $GITHUB_OUTPUT
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{fromJSON(needs.setup.outputs.matrix)}}
+        value: ${{fromJSON(needs.setup.outputs.kustomization_dirs)}}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
