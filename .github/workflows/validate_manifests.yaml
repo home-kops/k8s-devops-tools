@@ -1,0 +1,42 @@
+name: Validate Kubernetes Manifests
+
+on:
+  pull_request:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.value }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v4
+      with:
+        version: 'latest'
+
+    - name: Find directories with kustomization.yaml
+      id: find_kustomizations
+      run: |
+        echo "kustomization_dirs<<EOF" >> $GITHUB_OUTPUT
+        find . -type f -name 'kustomization.yaml' -exec dirname {} \; | sed 's|^\./||' | tr '\n' ' ' >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+  validate:
+    needs: [ setup ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        value: ${{fromJSON(needs.setup.outputs.matrix)}}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Validate manifests
+      run: kubectl kustomize "${{ matrix.value }}" --enable-helm
