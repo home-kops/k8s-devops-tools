@@ -38,7 +38,9 @@ configs:
             if [[ -n "${ARGOCD_ENV_HELM_RELEASE:-}" ]]; then
               helm repo add ${ARGOCD_ENV_HELM_RELEASE} ${ARGOCD_ENV_HELM_CHART}
             fi
-            helm dependency build
+            if [[ -f Chart.yaml ]]; then
+              helm dependency build
+            fi
         generate:
           command:
           - bash
