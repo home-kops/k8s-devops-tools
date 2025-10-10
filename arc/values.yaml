@@ -1,4 +1,3 @@
-gha-runner-scale-set:
-  githubConfigUrl: https://github.com/home-kops
-  githubConfigSecret:
-    github_token: <path:secret/data/devopstools/arc#github_token>
+githubConfigUrl: https://github.com/home-kops
+githubConfigSecret:
+  github_token: <path:secret/data/devopstools/arc#github_token>
