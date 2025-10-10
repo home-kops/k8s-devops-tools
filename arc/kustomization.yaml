@@ -5,11 +5,11 @@ helmCharts:
 - name: gha-runner-scale-set-controller
   repo:  oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
   version:  0.12.1
-  releaseName: gha-runner-scale-set-controller
+  releaseName: arc-controller
   namespace: devops-tools
 - name: gha-runner-scale-set
   version:  0.12.1
   repo:  oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
-  releaseName: gha-runner-scale-set
+  releaseName: arc-runner-set
   namespace: devops-tools
   valuesFile: values.yaml
