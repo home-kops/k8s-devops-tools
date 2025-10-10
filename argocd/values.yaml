@@ -34,10 +34,16 @@ configs:
           - sh
           - -c
           - |
-            helm repo add bitnami https://charts.bitnami.com/bitnami
-            if [[ -n "${ARGOCD_ENV_HELM_RELEASE:-}" ]]; then
-              helm repo add ${ARGOCD_ENV_HELM_RELEASE} ${ARGOCD_ENV_HELM_CHART}
+            # If helm chart url starts with oci:// then pull the chart directly
+            if [[ "${ARGOCD_ENV_HELM_CHART:-}" == oci://* ]]; then
+              helm pull "${ARGOCD_ENV_HELM_CHART}" --untar
+            else
+              helm repo add bitnami https://charts.bitnami.com/bitnami
+              if [[ -n "${ARGOCD_ENV_HELM_RELEASE:-}" ]]; then
+                helm repo add ${ARGOCD_ENV_HELM_RELEASE} ${ARGOCD_ENV_HELM_CHART}
+              fi
             fi
+
             helm dependency build
         generate:
           command:
