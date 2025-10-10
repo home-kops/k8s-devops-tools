@@ -1,0 +1,15 @@
+apiVersion: v2
+name: arc
+description: Mod chart for arc with AVP support
+type: application
+version: 0.1.0
+
+dependencies:
+- name: gha-runner-scale-set-controller
+  version:  0.12.1
+  repository: https://actions-runner-controller.github.io/actions-runner-controller
+
+dependencies:
+- name: gha-runner-scale-set
+  version:  0.12.1
+  repository: https://actions-runner-controller.github.io/actions-runner-controller
