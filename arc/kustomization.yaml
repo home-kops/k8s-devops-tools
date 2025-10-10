@@ -3,13 +3,13 @@ kind: Kustomization
 
 helmCharts:
 - name: gha-runner-scale-set-controller
-  repo: https://actions-runner-controller.github.io/actions-runner-controller
+  repo:  oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
   version:  0.12.1
   releaseName: gha-runner-scale-set-controller
   namespace: devops-tools
 - name: gha-runner-scale-set
   version:  0.12.1
-  repo: https://actions-runner-controller.github.io/actions-runner-controller
+  repo:  oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
   releaseName: gha-runner-scale-set
   namespace: devops-tools
   valuesFile: values.yaml
