@@ -46,12 +46,6 @@ configs:
           - |
             helm template $ARGOCD_APP_NAME -n $ARGOCD_APP_NAMESPACE ${ARGOCD_ENV_HELM_ARGS} . | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
       argocd-vault-plugin-helm-oci:
-        discover:
-          find:
-            command:
-            - sh
-            - "-c"
-            - "find . -name 'Chart.yaml' && find . -name 'values.yaml'"
         init:
           command:
           - sh
