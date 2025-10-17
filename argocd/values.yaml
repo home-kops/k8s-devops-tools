@@ -35,7 +35,7 @@ configs:
           - -c
           - |
             helm repo add bitnami https://charts.bitnami.com/bitnami
-            if [[ -n "${ARGOCD_ENV_HELM_RELEASE:-}" ]]; then
+            if [[ -n "${ARGOCD_ENV_HELM_RELEASE:-}" && "${ARGOCD_ENV_HELM_CHART:-}" != oci://* ]]; then
               helm repo add ${ARGOCD_ENV_HELM_RELEASE} ${ARGOCD_ENV_HELM_CHART}
             fi
             if [[ -f Chart.yaml ]]; then
@@ -46,12 +46,11 @@ configs:
           - bash
           - "-c"
           - |
-            # if [[ "${ARGOCD_ENV_HELM_CHART:-}" == oci://* ]]; then
-            #   helm template "$ARGOCD_APP_NAME" -n "$ARGOCD_APP_NAMESPACE" $ARGOCD_ENV_HELM_ARGS $ARGOCD_ENV_HELM_CHART | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
-            # else
-            #  
-            # fi
-            helm template $ARGOCD_APP_NAME -n $ARGOCD_APP_NAMESPACE $ARGOCD_ENV_HELM_ARGS . | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
+            if [[ "${ARGOCD_ENV_HELM_CHART:-}" == oci://* ]]; then
+              helm template "$ARGOCD_APP_NAME" -n "$ARGOCD_APP_NAMESPACE" $ARGOCD_ENV_HELM_ARGS $ARGOCD_ENV_HELM_CHART | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
+            else
+              helm template $ARGOCD_APP_NAME -n $ARGOCD_APP_NAMESPACE $ARGOCD_ENV_HELM_ARGS . | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
+            fi
       argocd-vault-plugin-kustomize:
         discover:
           find:
