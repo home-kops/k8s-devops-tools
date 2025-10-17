@@ -8,3 +8,5 @@ githubConfigSecret:
 controllerServiceAccount:
   namespace: devops-tools
   name: gha-scale-set-controller-gha-rs-controller
+
+minRunners: 1
