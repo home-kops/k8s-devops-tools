@@ -4,6 +4,7 @@ on:
 
 jobs:
   Explore-GitHub-Actions:
-    runs-on: arc-runners
+    runs-on:
+      - arc-runners
     steps:
     - run: echo "🎉 This job uses runner scale set runners!"
