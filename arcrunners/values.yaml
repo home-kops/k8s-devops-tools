@@ -1,19 +1,10 @@
 githubConfigUrl: https://github.com/home-kops
 
 githubConfigSecret:
-  github_app_id: <path:secret/data/devopstools/arc#githubAppId>
-  github_app_installation_id: <path:secret/data/devopstools/arc#githubAppInstallationId>
-  github_app_private_key: <path:secret/data/devopstools/arc/githubAppPrivateKey#private_key>
+  github_app_id: "<path:secret/data/devopstools/arc#githubAppId>"
+  github_app_installation_id: "<path:secret/data/devopstools/arc#githubAppInstallationId>"
+  github_app_private_key: "<path:secret/data/devopstools/arc/githubAppPrivateKey#private_key>"
 
 controllerServiceAccount:
   namespace: devops-tools
   name: gha-scale-set-controller-gha-rs-controller
-
-containerMode:
-  type: "kubernetes"
-  kubernetesModeWorkVolumeClaim:
-    accessModes: ["ReadWriteOnce"]
-    storageClassName: "dynamic-blob-storage"
-    resources:
-      requests:
-        storage: 1Gi
