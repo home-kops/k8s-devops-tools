@@ -3,4 +3,4 @@ githubConfigSecret:
   github_token: <path:secret/data/devopstools/arc#github_token>
 controllerServiceAccount:
   namespace: devops-tools
-  name: actions-runner-controller-gha-rs-controller
+  name: gha-scale-set-controller-gha-rs-controller
