@@ -63,7 +63,7 @@ configs:
           - bash
           - "-c"
           - |
-            helm template $ARGOCD_APP_NAME -n $ARGOCD_APP_NAMESPACE $ARGOCD_ENV_HELM_ARGS . | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
+            helm template $ARGOCD_APP_NAME -n $ARGOCD_APP_NAMESPACE ${ARGOCD_ENV_HELM_ARGS} . | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
       argocd-vault-plugin-kustomize:
         discover:
           find:
