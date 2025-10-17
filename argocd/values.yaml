@@ -46,11 +46,12 @@ configs:
           - bash
           - "-c"
           - |
-            if [[ "${ARGOCD_ENV_HELM_CHART:-}" == oci://* ]]; then
-              helm template "$ARGOCD_APP_NAME" --namespace "$ARGOCD_APP_NAMESPACE" $ARGOCD_ENV_HELM_ARGS $ARGOCD_ENV_HELM_CHART | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
-            else
-              helm template $ARGOCD_APP_NAME -n $ARGOCD_APP_NAMESPACE ${ARGOCD_ENV_HELM_ARGS} . | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
-            fi
+            # if [[ "${ARGOCD_ENV_HELM_CHART:-}" == oci://* ]]; then
+            #   helm template "$ARGOCD_APP_NAME" -n "$ARGOCD_APP_NAMESPACE" $ARGOCD_ENV_HELM_ARGS $ARGOCD_ENV_HELM_CHART | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
+            # else
+            #  
+            # fi
+            helm template $ARGOCD_APP_NAME -n $ARGOCD_APP_NAMESPACE $ARGOCD_ENV_HELM_ARGS . | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
       argocd-vault-plugin-kustomize:
         discover:
           find:
