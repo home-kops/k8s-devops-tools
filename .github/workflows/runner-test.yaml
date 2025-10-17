@@ -1,0 +1,9 @@
+name: Actions Runner Controller Test
+on:
+  workflow_dispatch:
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: gha-scale-set
+    steps:
+    - run: echo "🎉 This job uses runner scale set runners!"
