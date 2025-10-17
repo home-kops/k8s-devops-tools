@@ -5,7 +5,10 @@ githubConfigSecret:
   github_app_installation_id: "<path:secret/data/devopstools/arc#githubAppInstallationId>"
   github_app_private_key: <path:secret/data/devopstools/arc/githubAppPrivateKey#private_key>
 
-runnerScaleSetName: "arc"
+runnerScaleSetName: "arc-runners"
+
+minRunners: 0
+maxRunners: 10
 
 controllerServiceAccount:
   namespace: "devops-tools"
