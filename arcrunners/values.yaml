@@ -2,7 +2,7 @@ githubConfigUrl: "https://github.com/home-kops/"
 
 githubConfigSecret:
   # github_token: "<path:secret/data/devopstools/arc#githubToken>"
-  github_app_id: "<path:secret/data/devopstools/arc#githubAppId>"
+  github_app_id: "<path:secret/data/devopstools/arc#githubAppClientId>"
   github_app_installation_id: "<path:secret/data/devopstools/arc#githubAppInstallationId>"
   github_app_private_key: <path:secret/data/devopstools/arc/githubAppPrivateKey#private_key>
 
