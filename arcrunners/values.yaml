@@ -11,6 +11,6 @@ runnerScaleSetName: "arc-runners"
 minRunners: 0
 maxRunners: 10
 
-controllerServiceAccount:
-  namespace: "devops-tools"
-  name: "gha-scale-set-controller-gha-rs-controller"
+#controllerServiceAccount:
+#  namespace: "devops-tools"
+#  name: "gha-scale-set-controller-gha-rs-controller"
