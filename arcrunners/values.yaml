@@ -8,6 +8,8 @@ githubConfigSecret:
 
 runnerScaleSetName: "arc-runners"
 
+runnerGroup: "homelab"
+
 minRunners: 0
 maxRunners: 10
 
