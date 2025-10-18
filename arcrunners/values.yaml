@@ -1,4 +1,4 @@
-githubConfigUrl: "https://github.com/home-kops"
+githubConfigUrl: "https://github.com/home-kops/k8s-devops-tools"
 
 githubConfigSecret:
   github_token: "<path:secret/data/devopstools/arc#githubToken>"
