@@ -22,42 +22,6 @@ configs:
   cmp:
     create: true
     plugins:
-      argocd-vault-plugin-helm:
-        discover:
-          find:
-            command:
-            - sh
-            - "-c"
-            - "find . -name 'Chart.yaml' && find . -name 'values.yaml'"
-        init:
-          command:
-          - sh
-          - -c
-          - |
-            helm repo add bitnami https://charts.bitnami.com/bitnami
-            if [[ -n "${ARGOCD_ENV_HELM_RELEASE:-}" ]]; then
-              helm repo add ${ARGOCD_ENV_HELM_RELEASE} ${ARGOCD_ENV_HELM_CHART}
-            fi
-            helm dependency build
-        generate:
-          command:
-          - bash
-          - "-c"
-          - |
-            helm template $ARGOCD_APP_NAME -n $ARGOCD_APP_NAMESPACE ${ARGOCD_ENV_HELM_ARGS} . | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
-      argocd-vault-plugin-helm-oci:
-        init:
-          command:
-          - sh
-          - -c
-          - |
-            helm repo add bitnami https://charts.bitnami.com/bitnami
-        generate:
-          command:
-          - bash
-          - "-c"
-          - |
-            helm template "$ARGOCD_APP_NAME" -n "$ARGOCD_APP_NAMESPACE" $ARGOCD_ENV_HELM_ARGS $ARGOCD_ENV_HELM_CHART | argocd-vault-plugin generate --secret-name devops-tools:argocd-vault-plugin-credentials -
       argocd-vault-plugin-kustomize:
         discover:
           find:
@@ -128,40 +92,6 @@ repoServer:
     - mountPath: /custom-tools
       name: custom-tools
   extraContainers:
-  - name: avp-helm
-    command: [/var/run/argocd/argocd-cmp-server]
-    image: quay.io/argoproj/argocd
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 999
-    volumeMounts:
-    - mountPath: /var/run/argocd
-      name: var-files
-    - mountPath: /home/argocd/cmp-server/plugins
-      name: plugins
-    - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-      subPath: argocd-vault-plugin-helm.yaml
-      name: cmp-plugin
-    - name: custom-tools
-      subPath: argocd-vault-plugin
-      mountPath: /usr/local/bin/argocd-vault-plugin
-  - name: avp-helm-oci
-    command: [/var/run/argocd/argocd-cmp-server]
-    image: quay.io/argoproj/argocd
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 999
-    volumeMounts:
-    - mountPath: /var/run/argocd
-      name: var-files
-    - mountPath: /home/argocd/cmp-server/plugins
-      name: plugins
-    - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-      subPath: argocd-vault-plugin-helm-oci.yaml
-      name: cmp-plugin
-    - name: custom-tools
-      subPath: argocd-vault-plugin
-      mountPath: /usr/local/bin/argocd-vault-plugin
   - name: avp-kustomize
     command: [/var/run/argocd/argocd-cmp-server]
     image: quay.io/argoproj/argocd
